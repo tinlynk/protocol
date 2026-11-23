@@ -1,0 +1,35 @@
+{
+  "name": "@tinlynk/protocol",
+  "version": "0.1.0",
+  "private": false,
+  "description": "TinLynk protocol: canonical types and JSON Schemas for agents, tools, and messages.",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./schemas/*": "./schemas/*"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist",
+    "lint": "echo 'No linter configured yet'",
+    "prepare": "npm run build",
+    "test": "npm run build && node --test test/**/*.test.mjs"
+  },
+  "files": [
+    "dist",
+    "schemas"
+  ],
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "@types/node": "^22.0.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

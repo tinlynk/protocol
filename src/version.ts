@@ -1,0 +1,2 @@
+// SPDX-License-Identifier: MIT
+export const PROTOCOL_VERSION = "0.1.0" as const;

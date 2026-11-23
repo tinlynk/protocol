@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.tinlynk.dev/message.schema.json",
+  "title": "Message",
+  "type": "object",
+  "required": ["id", "role", "content", "timestamp"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "role": { "type": "string", "enum": ["system", "user", "assistant", "tool"] },
+    "content": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": ["type", "text"],
+            "properties": {
+              "type": { "const": "text" },
+              "text": { "type": "string" }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": ["type", "callId", "name", "arguments"],
+            "properties": {
+              "type": { "const": "tool_call" },
+              "callId": { "type": "string", "minLength": 1 },
+              "name": { "type": "string", "minLength": 1 },
+              "arguments": {}
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": ["type", "callId", "result"],
+            "properties": {
+              "type": { "const": "tool_result" },
+              "callId": { "type": "string", "minLength": 1 },
+              "result": {},
+              "isError": { "type": "boolean" }
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "metadata": { "type": "object", "additionalProperties": true }
+  },
+  "additionalProperties": false
+}

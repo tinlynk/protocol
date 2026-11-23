@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.tinlynk.dev/chat-request.schema.json",
+  "title": "ChatRequest",
+  "type": "object",
+  "required": ["model", "messages"],
+  "properties": {
+    "model": { "type": "string", "minLength": 1 },
+    "messages": {
+      "type": "array",
+      "items": { "$ref": "message.schema.json" },
+      "minItems": 1
+    },
+    "tools": {
+      "type": "array",
+      "items": { "$ref": "tool-descriptor.schema.json" }
+    },
+    "stream": { "type": "boolean" },
+    "temperature": { "type": "number", "minimum": 0 },
+    "metadata": { "type": "object", "additionalProperties": true }
+  },
+  "additionalProperties": false
+}
